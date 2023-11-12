@@ -1,3 +1,9 @@
+'''
+Fisher D. - 55%
+Fedyakin D. - 30%
+Popov I. - 45%
+'''
+
 import random
 
 def nonsense_generator(text, num_sentences):
