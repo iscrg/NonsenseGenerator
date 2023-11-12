@@ -13,50 +13,33 @@ def nonsense_generator(text, num_sentences):
     words = text.split()
     legacy_words = {}
 
-    for i in range(len(text)-1):
-        if text[i] in words.keys():
-            legacy_words[text[i]].add(text[i+1])
+    for i in range(len(words)-1):
+        if words[i] in legacy_words.keys():
+            legacy_words[words[i]].append(words[i+1])
         else:
-            legacy_words[text[i]] = set(text[i+1])
+            legacy_words[words[i]] = [words[i+1]]
 
-    """
-    Dict structure:
-    
-    legacy_words = {
-        'word': set('legacy_words', 'word1', 'word2')
-    }
-    """
-
-
-    # Generating sentences
-    # Рандомно выбираем слово и после рандомно выбираем слово из тех, что могут идти после него. Делаем проверку, чтобы предолжение не было слишком длинным.
-    nonsense_sentences = []
+    # Generating sentences and text
+    nonsense_text = ''
     for i in range(num_sentences):
         word = random.choice(list(legacy_words.keys()))
         nonsense_sentence = word + ' '
         words_amount = 1
 
-        while words_amount <= 10 and not(word[-1] in '.!?'):
-            word = random.choice(list(legacy_words[word]))
+        while words_amount <= 30 and not(word[-1] in '.!?'):
+            word = random.choice(legacy_words[word])
             nonsense_sentence += word + ' '
             words_amount += 1
         
         if nonsense_sentence[-2] not in '.!?':
             nonsense_sentence = nonsense_sentence[:-1] + '. '
         
-        nonsense_sentences.append(nonsense_sentence)
-
-    # Placing sentences
-    # Можно сделать сплит изначального текста по точками и рандомом определять после какого предложения ставить бредовые предложения.
-    nonsense_text = None
-    for i in range(num_sentences):
-        pass
-
+        nonsense_text += nonsense_sentence
+    
     return nonsense_text
 
-
 with open('text.txt') as file:
-    num_sentences = file.readline()
+    num_sentences = int(file.readline())
     text = file.read()
 
 nonsense_text = nonsense_generator(text, num_sentences)
