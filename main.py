@@ -1,3 +1,5 @@
+import random
+
 def nonsense_generator(text, num_sentences):
     """
     The function generates a given number of rambling sentences and randomly inserts them into the original text.
@@ -28,9 +30,21 @@ def nonsense_generator(text, num_sentences):
 
     # Generating sentences
     # Рандомно выбираем слово и после рандомно выбираем слово из тех, что могут идти после него. Делаем проверку, чтобы предолжение не было слишком длинным.
-    nonsense_sentencies = []
+    nonsense_sentences = []
     for i in range(num_sentences):
-        nonsense_sentencies.append(None)
+        word = random.choice(list(legacy_words.keys()))
+        nonsense_sentence = word + ' '
+        words_amount = 1
+
+        while words_amount <= 10 and not(word[-1] in '.!?'):
+            word = random.choice(list(legacy_words[word]))
+            nonsense_sentence += word + ' '
+            words_amount += 1
+        
+        if nonsense_sentence[-2] not in '.!?':
+            nonsense_sentence = nonsense_sentence[:-1] + '. '
+        
+        nonsense_sentences.append(nonsense_sentence)
 
     # Placing sentences
     # Можно сделать сплит изначального текста по точками и рандомом определять после какого предложения ставить бредовые предложения.
