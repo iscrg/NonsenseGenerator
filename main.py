@@ -1,10 +1,11 @@
 '''
-Fisher D. - 55%
-Fedyakin D. - 30%
-Popov I. - 45%
+Fisher D. - 100
+Fedyakin D. - 100
+Popov I. - 90
 '''
 
 import random
+
 
 def nonsense_generator(text, num_sentences):
     """
@@ -44,11 +45,12 @@ def nonsense_generator(text, num_sentences):
     
     return nonsense_text
 
+
 with open('text.txt') as file:
     num_sentences = int(file.readline())
     text = file.read()
 
 nonsense_text = nonsense_generator(text, num_sentences)
 
-with open('nonsense_text.txt', 'w+') as file:
+with open('nonsense_text.txt', 'w+', encoding='utf-8') as file:
     file.write(nonsense_text)
