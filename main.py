@@ -1,6 +1,6 @@
 '''
 Fisher D. - 100
-Fedyakin D. - 100
+Fedyakin D. - 75
 Popov I. - 90
 '''
 
